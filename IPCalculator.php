@@ -73,15 +73,22 @@ function getIPInfo($IPParagraph='0.0.0.0/32'){
 	$iplong = ip2long($ipString); // ip转长整型
 	$subnetInit = array();
 	for ($i=0; $i < $subnet; $i++) {
-		$subnetInit[$i] = long2ip($iplong+($dilatation*$i)); // 循环算出每个子网ip的
+		$subnetInit[$i] = long2ip($iplong+($dilatation*$i)); // 循环算出每个子网的第一个ip
 	}
 
 	$dilatationIP = array();
 	for ($i=0; $i < $count; $i++) {
 		if ($subnet === 1) { // 当子网只有一个时，循环当前类别的总个数
 			$dilatationIP[$i] = long2ip(ip2long($subnetInit[0])+$i);
+		}elseif(isset($subnetInit[$i+1])){
+			if (ip2long($IPParagraphArray[0]) >= ip2long($subnetInit[$i]) && ip2long($IPParagraphArray[0]) < ip2long($subnetInit[$i+1])) {
+				for ($j=0; $j < $dilatation; $j++) {
+					$dilatationIP[$j] = long2ip(ip2long($subnetInit[$i])+$j); // ip在子网里所有的ip数
+				}
+				break;
+			}
 		}else{
-			if (ip2long($IPParagraphArray[0]) > ip2long($subnetInit[$i]) && ip2long($IPParagraphArray[0]) < ip2long($subnetInit[$i+1])) {
+			if (ip2long($IPParagraphArray[0]) >= ip2long($subnetInit[$i])) {
 				for ($j=0; $j < $dilatation; $j++) {
 					$dilatationIP[$j] = long2ip(ip2long($subnetInit[$i])+$j); // ip在子网里所有的ip数
 				}
@@ -108,4 +115,5 @@ function getIPInfo($IPParagraph='0.0.0.0/32'){
 	return $rs;
 }
 
-print_r(getIPInfo('192.168.1.53/27'));
+print_r(getIPInfo('14.18.225.127/26'));
+// print_r(getIPInfo('192.168.1.53/27'));
