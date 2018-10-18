@@ -5,5 +5,6 @@
 
 # firstScrapy.py 是python 爬虫应用
 > 学习于 http://www.cnblogs.com/linhaifeng/articles/7773496.html 
+> 需要自行创建一个保存视屏的目录文件，并修改firstScrapy.py文件中的mp4保存路径
 
 采用python编写的代码
