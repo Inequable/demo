@@ -3,7 +3,7 @@
 
 采用PHP编写的代码
 
-# python 爬虫应用
+# firstScrapy.py 是python 爬虫应用
 > 学习于 http://www.cnblogs.com/linhaifeng/articles/7773496.html 
 
 采用python编写的代码
